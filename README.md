@@ -2,7 +2,14 @@
 
 Small snippets of code that I refer to in my daily work.
 
-## C++
+## Table of Contents
+
+* [C++](#cpp)
+* [git](#git)
+* [cmake](#cmake)
+* [Linux](#linux)
+
+## <a name="cpp"></a> C++
 
 These assume that you are using C++14 and boost.
 
@@ -61,13 +68,13 @@ These assume that you are using C++14 and boost.
     request << boost::network::header("Connection", "close");
     auto const result = body(boost::network::http::client().get(request));
 
-## git
+## <a name="git"></a> git
 
 ### Create the “git godlog” command
 
     git config --global alias.godlog "log --graph --oneline --decorate"
 
-## cmake
+## <a name="cmake"></a> cmake
 
 ### Same output directory for all sub-projects
 
@@ -80,7 +87,7 @@ These assume that you are using C++14 and boost.
         set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
     endif (CCACHE_FOUND)
 
-## Linux
+## <a name="linux"></a> Linux
 
 ### Natural Scrolling in Linux
 
