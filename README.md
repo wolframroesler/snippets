@@ -4,16 +4,18 @@ Small snippets of code that I refer to in my daily work.
 
 ## C++
 
+These assume that you are using C++14 and boost.
+
 ### Replace a string with regex
 
     #include <regex>
-    auto result = regex_replace(str,std::regex("<"),"&lt")
+    auto const result = regex_replace(str,std::regex("<"),"&lt;")
 
 ### Check if a string matches a regex
 
     #include <regex>
     if (std::regex_match(string,std::regex("[a-zA-Z]*")) {
-      cout << "Matches\n";
+        cout << "Matches\n";
     }
 
 ### Load a file into memory
@@ -25,7 +27,7 @@ Small snippets of code that I refer to in my daily work.
         std::istreambuf_iterator<char>()
     );
 
-### Copy one stream to another
+### Copy all from one stream into another
 
     std::istream in = ...;
     std::ostream out = ...;
@@ -36,18 +38,28 @@ Small snippets of code that I refer to in my daily work.
     #include <fstream>
     std::string longstr;
     {
-      std::ifstream ifs("/dev/urandom",std::ios::binary);
-      std::istream_iterator<char> isi(ifs);
-      std::copy_n(isi,
-          10'000'000,
-          std::insert_iterator<std::string>(longstr,longstr.begin()));
+        std::ifstream ifs("/dev/urandom",std::ios::binary);
+        std::istream_iterator<char> isi(ifs);
+        std::copy_n(isi,
+            10'000'000,
+            std::insert_iterator<std::string>(longstr,longstr.begin()));
     }
+
+### Create all subdirectories required for a file
+
+    #include <boost/filesystem.hpp>
+    boost::filesystem::create_directories(boost::filesystem::path(file).parent_path());
+
+### Get current local time as a struct tm
+
+    #include <boost/date_time/posix_time/posix_time.hpp>
+    auto const tm = boost::posix_time::to_tm(boost::posix_time::second_clock::local_time());
 
 ### Load a URL with cpp-netlib
 
     boost::network::http::client::request request("http://...");
     request << boost::network::header("Connection", "close");
-    return body(boost::network::http::client().get(request));
+    auto const result = body(boost::network::http::client().get(request));
 
 ## git
 
@@ -59,14 +71,14 @@ Small snippets of code that I refer to in my daily work.
 
 ### Same output directory for all sub-projects
 
-    set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/build")
+    set (EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/build")
 
 ### Use compiler cache (ccache)
 
-    find_program(CCACHE_FOUND ccache)
-    if(CCACHE_FOUND)
+    find_program (CCACHE_FOUND ccache)
+    if (CCACHE_FOUND)
         set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-    endif(CCACHE_FOUND) 
+    endif (CCACHE_FOUND)
 
 ## Linux
 
