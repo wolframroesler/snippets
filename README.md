@@ -84,6 +84,26 @@ request << boost::network::header("Connection", "close");
 auto const result = body(boost::network::http::client().get(request));
 ```
 
+### Convert a file descriptor into an I/O stream
+
+```cpp
+#include <iostream>
+#include <boost/iostreams/stream.hpp>
+#include <boost/iostreams/device/file_descriptor.hpp>
+
+// Output (file opened for writing)
+int fd = ...;
+boost::iostreams::file_descriptor_sink snk(fd,boost::iostreams::close_handle);
+boost::iostreams::stream<boost::iostreams::file_descriptor_sink> os(snk);
+os << "Hello World\n";
+
+// Input (file opened for reading)
+int fd = ...;
+boost::iostreams::file_descriptor_source src(fd,boost::iostreams::close_handle);
+boost::iostreams::stream<boost::iostreams::file_descriptor_source> is(src);
+is >> myvariable;
+```
+
 ## <a name="git"></a> git
 
 ### Create the “git godlog” command
