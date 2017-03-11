@@ -147,3 +147,5 @@ EndSection
 ```
 
 Source: <https://kofler.info/natural-scrolling-mit-dem-mausrad/#more-1956>
+
+*Wolfram Rösler • wolfram@roesler-ac.de • https://twitter.com/wolframroesler • https://github.com/wolframroesler*
