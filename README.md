@@ -219,15 +219,15 @@ EndSection
 
 Source: <https://kofler.info/natural-scrolling-mit-dem-mausrad/#more-1956>
 
-### Mounting Nextcloud
+### Mount Nextcloud
 
-Access the files in your Nextcloud without syncing them to your harddisk. Doesn't require enough disk space to store your Nextcloud files. Doesn't use the Nextcloud client software.
+Access the files in your Nextcloud without syncing them to your harddisk, using Nextcloud's WebDAV interface. Doesn't require disk space to store your Nextcloud files locally. Doesn't use the Nextcloud client software.
 
-Tested with Ubuntu 16.04.
+Tested with Ubuntu 16.04. Will probably work with Owncloud or any other WebDAV-based file service.
 
 The following examples assume that
 
-* `example.com` is your Nextcloud server
+* `mycloud.example.com` is your Nextcloud server
 * `myname` is your Nextcloud user name
 * `mypassword`is your Nextcloud password
 
@@ -243,13 +243,13 @@ $ sudo usermod -aG davfs2 $USER
 Add the following line to `/etc/fstab`:
 
 ```
-https://example.com/remote.php/webdav /mnt/myname davfs user,noauto 0 0
+https://mycloud.example.com/remote.php/webdav /mnt/myname davfs user,noauto 0 0
 ```
 
 If you want read-only access (you can read your cloud files but not change them):
 
 ```
-https://example.com/remote.php/webdav /mnt/myname davfs user,noauto,ro,dir_mode=555,file_mode=444 0 0
+https://mycloud.example.com/remote.php/webdav /mnt/myname davfs user,noauto,ro,dir_mode=555,file_mode=444 0 0
 ```
 
 Add the following to `/etc/davfs2/secrets`:
@@ -258,7 +258,7 @@ Add the following to `/etc/davfs2/secrets`:
 /mnt/myname myname mypassword
 ```
 
-Note: Every user on your Linux machine can mount your Nextcloud files if you do it this way, which may or may not be desired.
+Note: Every user on your Linux machine can mount your Nextcloud files, which may or may not be desired.
 
 Finally, to mount your Nextcloud files:
 
