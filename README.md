@@ -13,6 +13,22 @@ Small snippets of code that I refer to in my daily work.
 
 These assume that you are using C++14 and boost.
 
+### Activate std::string literals
+
+... like `auto s = "this is a std::string"s;`
+
+```cpp
+using namespace std::literals;
+```
+
+### Activate std::chrono literals
+
+... like `auto microseconds = 1000us;`
+
+```cpp
+using namespace std::chrono_literals;
+```
+
 ### Replace a string with regex
 
 ```cpp
