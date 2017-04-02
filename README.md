@@ -202,7 +202,7 @@ endif (CCACHE_FOUND)
 
 ## <a name="linux"></a> Linux
 
-### Natural Scrolling in Linux
+### Natural Scrolling
 
 Put the following into /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf, then reboot:
 
@@ -218,6 +218,55 @@ EndSection
 ```
 
 Source: <https://kofler.info/natural-scrolling-mit-dem-mausrad/#more-1956>
+
+### Mounting Nextcloud
+
+Access the files in your Nextcloud without syncing them to your harddisk. Doesn't require enough disk space to store your Nextcloud files. Doesn't use the Nextcloud client software.
+
+Tested with Ubuntu 16.04.
+
+The following examples assume that
+
+* `example.com` is your Nextcloud server
+* `myname` is your Nextcloud user name
+* `mypassword`is your Nextcloud password
+
+Preparation:
+
+```sh
+$ sudo apt install ca-certificates
+$ sudo apt install davfs2
+$ sudo mkdir /mnt/myname
+$ sudo usermod -aG davfs2 $USER
+```
+
+Add the following line to `/etc/fstab`:
+
+```
+https://example.com/remote.php/webdav /mnt/myname davfs user,noauto 0 0
+```
+
+If you want read-only access (you can read your cloud files but not change them):
+
+```
+https://example.com/remote.php/webdav /mnt/myname davfs user,noauto,ro,dir_mode=555,file_mode=444 0 0
+```
+
+Add the following to `/etc/davfs2/secrets`:
+
+```
+/mnt/myname myname mypassword
+```
+
+Note: Every user on your Linux machine can mount your Nextcloud files if you do it this way, which may or may not be desired.
+
+Finally, to mount your Nextcloud files:
+
+```sh
+$ sudo mount /mnt/myname
+```
+
+More information: https://wiki.ubuntuusers.de/WebDAV/
 
 --
 *Wolfram Rösler • wolfram@roesler-ac.de • https://twitter.com/wolframroesler • https://github.com/wolframroesler*
