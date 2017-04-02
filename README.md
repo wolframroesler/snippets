@@ -112,6 +112,39 @@ is >> myvariable;
 git config --global alias.godlog "log --graph --oneline --decorate"
 ```
 
+### Manage Libre Office files in git
+
+Requires git 1.6.1 or later.
+
+Add the following to `~/.gitconfig`:
+
+```
+[diff "odf"]
+      textconv=odt2txt --stdout
+```
+
+Add the following to the `.gitattributes` file in the project root:
+
+```
+*.ods diff=odf
+*.odt diff=odf
+*.odp diff=odf
+```
+
+If `git diff` displays the following error:
+
+```
+Error: Unable to connect or start own listener. Aborting.
+fatal: unable to read files to diff
+```
+
+then type `unoconv -l` and retry.
+
+More information:
+
+* http://www-verimag.imag.fr/~moy/opendocument/
+* https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes ("Diffing Binary Files" section)
+
 ## <a name="cmake"></a> cmake
 
 ### Same output directory for all sub-projects
@@ -148,4 +181,5 @@ EndSection
 
 Source: <https://kofler.info/natural-scrolling-mit-dem-mausrad/#more-1956>
 
+--
 *Wolfram Rösler • wolfram@roesler-ac.de • https://twitter.com/wolframroesler • https://github.com/wolframroesler*
