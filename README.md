@@ -7,6 +7,7 @@ Small snippets of code that I refer to in my daily work.
 * [C++](#cpp)
 * [git](#git)
 * [cmake](#cmake)
+* [bash](#bash)
 * [Linux](#linux)
 
 ## <a name="cpp"></a> C++
@@ -199,6 +200,20 @@ if (CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
 endif (CCACHE_FOUND)
 ```
+
+## <a name="bash"></a> bash
+
+### Shell Prompt
+
+Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. Put the following into your .profile or .bashrc.
+
+```sh
+PS1BEFORE=$(tput sgr0)$(tput rev)$(tput setaf 4)
+PS1AFTER=$(tput sgr0)
+PS1='\[$PS1BEFORE\]$? [\h:\w]\[$PS1AFTER\] \$ '
+```
+
+![Screenshot showing bash prompt](img01.png)
 
 ## <a name="linux"></a> Linux
 
