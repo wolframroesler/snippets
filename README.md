@@ -49,8 +49,8 @@ if (std::regex_match(string,std::regex("[a-zA-Z]*")) {
 
 ```cpp
 #include <fstream>
-std::ifstream ifs(file);
-std::string const orig(
+auto ifs = std::ifstream(file);
+auto const data = std::string(
     std::istreambuf_iterator<char>(ifs),
     std::istreambuf_iterator<char>()
 );
@@ -59,8 +59,8 @@ std::string const orig(
 ### Copy all from one stream into another
 
 ```cpp
-std::istream in = ...;
-std::ostream out = ...;
+auto in = std::istream(...);
+auto out = std::ostream(...);
 out << in.rdbuf();
 ```
 
@@ -70,8 +70,8 @@ out << in.rdbuf();
 #include <fstream>
 std::string longstr;
 {
-    std::ifstream ifs("/dev/urandom",std::ios::binary);
-    std::istream_iterator<char> isi(ifs);
+    auto ifs = std::ifstream("/dev/urandom",std::ios::binary);
+    auto isi = std::istream_iterator<char>(ifs);
     std::copy_n(isi,
         10'000'000,
         std::insert_iterator<std::string>(longstr,longstr.begin()));
@@ -95,8 +95,8 @@ auto const tm = boost::posix_time::to_tm(boost::posix_time::second_clock::local_
 ### Load a URL with cpp-netlib
 
 ```cpp
-boost::network::http::client::request request("http://...");
-request << boost::network::header("Connection", "close");
+auto request = boost::network::http::client::request("http://...");
+request << boost::network::header("Connection","close");
 auto const result = body(boost::network::http::client().get(request));
 ```
 
@@ -268,5 +268,5 @@ $ sudo mount /mnt/myname
 
 More information: https://wiki.ubuntuusers.de/WebDAV/
 
---
+---
 *Wolfram Rösler • wolfram@roesler-ac.de • https://twitter.com/wolframroesler • https://github.com/wolframroesler*
