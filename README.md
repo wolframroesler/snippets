@@ -9,6 +9,7 @@ Small snippets of code that I refer to in my daily work.
 * [cmake](#cmake)
 * [bash](#bash)
 * [Linux](#linux)
+* [MySQL/MariaDB](#mysql)
 
 ## <a name="cpp"></a> C++
 
@@ -300,6 +301,22 @@ $ sudo mount /mnt/myname
 ```
 
 More information: https://wiki.ubuntuusers.de/WebDAV/
+
+## <a name="mysql"></a> MySQL/MariaDB
+
+### SQL Profiling
+
+```sql
+set profiling=1;
+select ...;
+show profile;
+```
+
+### Show Explain Plan
+
+```sql
+explain select ...;
+```
 
 ---
 *Wolfram Rösler • wolfram@roesler-ac.de • https://twitter.com/wolframroesler • https://github.com/wolframroesler*
