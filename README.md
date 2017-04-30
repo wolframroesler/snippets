@@ -203,6 +203,8 @@ endif (CCACHE_FOUND)
 
 ## <a name="bash"></a> bash
 
+Run these manually in the shell, or put them into your ~/.profile or ~/.bash_profile.
+
 ### Shell Prompt
 
 Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. Put the following into your .profile or .bashrc.
@@ -215,11 +217,21 @@ PS1='\[$PS1BEFORE\]$? [\h:\w]\[$PS1AFTER\] \$ '
 
 ![Screenshot showing bash prompt](img01.png)
  
-### Put host name and work directory into terminal window title
+### Host Name And Work Directory In Terminal Window Title
 
 ```sh
 PS1="\[\e]0;\h:\w\a\]$PS1"
 ```
+
+### Unlimited History
+
+```sh
+export HISTFILE="$HOME/.bash-history"
+export HISTFILESIZE=
+export HISTSIZE=
+```
+
+Changing the history file name from the default .bash_history to something else (here, by using a dash instead of an underscore, but could be anything) prevents non-login shells (that use the default history size) from deleting our history.
 
 ## <a name="linux"></a> Linux
 
