@@ -214,6 +214,12 @@ PS1='\[$PS1BEFORE\]$? [\h:\w]\[$PS1AFTER\] \$ '
 ```
 
 ![Screenshot showing bash prompt](img01.png)
+ 
+### Put host name and work directory into terminal window title
+
+```sh
+PS1="\[\e]0;\h:\w\a\]$PS1"
+```
 
 ## <a name="linux"></a> Linux
 
