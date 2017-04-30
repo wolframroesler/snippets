@@ -302,6 +302,18 @@ $ sudo mount /mnt/myname
 
 More information: https://wiki.ubuntuusers.de/WebDAV/
 
+### Extract Pages From PDF File
+
+This is not limited to Linux, but works whenever Ghostscript is installed. Replace 39 and 42 with the page numbers you want to extract.
+
+```sh
+gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
+	-dFirstPage=39 \
+	-dLastPage=42 \
+	-sOutputFile=name_of_your_output_file.pdf \
+	name_of_your_input_file.pdf
+```
+
 ## <a name="mysql"></a> MySQL/MariaDB
 
 ### SQL Profiling
