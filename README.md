@@ -9,6 +9,7 @@ Small snippets of code that I refer to in my daily work.
 * [cmake](#cmake)
 * [bash](#bash)
 * [Linux](#linux)
+* [macOS](#macos)
 * [MySQL/MariaDB](#mysql)
 
 ## <a name="cpp"></a> C++
@@ -312,6 +313,40 @@ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
 	-dLastPage=42 \
 	-sOutputFile=name_of_your_output_file.pdf \
 	name_of_your_input_file.pdf
+```
+
+## <a name="macos"></a> macOS
+
+### Eject CD/DVD
+
+```sh
+$ drutil tray eject
+```
+
+### Don't Create .DS_Store Files
+
+```sh
+$ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+```
+
+Log off or reboot to activate.
+
+### Install Package Manager
+
+To install software a boss.
+
+```sh
+$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$ brew analytics off
+```
+
+More information: http://brew.sh
+
+You may like:
+
+```sh
+$ brew install htop
+$ brew install tree
 ```
 
 ## <a name="mysql"></a> MySQL/MariaDB
