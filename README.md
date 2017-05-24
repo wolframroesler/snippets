@@ -36,7 +36,7 @@ using namespace std::chrono_literals;
 
 ```cpp
 #include <regex>
-auto const result = regex_replace(str,std::regex("<"),"&lt;")
+auto const result = regex_replace(str,std::regex("<"),"&lt;");
 ```
 
 ### Check if a string matches a regex
