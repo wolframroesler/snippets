@@ -333,7 +333,7 @@ Log off or reboot to activate.
 
 ### Install Package Manager
 
-To install software a boss.
+To install software like a boss.
 
 ```sh
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
