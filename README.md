@@ -7,7 +7,7 @@ Small snippets of code that I refer to in my daily work.
 * [C++](#cpp)
 * [git](#git)
 * [cmake](#cmake)
-* [bash](#bash)
+* [Unix/Shell](#unix)
 * [Linux](#linux)
 * [macOS](#macos)
 * [MySQL/MariaDB](#mysql)
@@ -203,9 +203,7 @@ if (CCACHE_FOUND)
 endif (CCACHE_FOUND)
 ```
 
-## <a name="bash"></a> bash
-
-Run these manually in the shell, or put them into your ~/.profile or ~/.bash_profile.
+## <a name="unix"></a> Unix/Shell
 
 ### Shell Prompt
 
@@ -234,6 +232,24 @@ export HISTSIZE=
 ```
 
 Changing the history file name from the default .bash_history to something else (here, by using a dash instead of an underscore, but could be anything) prevents non-login shells (that use the default history size) from deleting our history.
+
+### Convert To/From time_t
+
+Requires gawk (the Gnu implementation of awk, e. g. as Linux has it).
+
+```sh
+$ awk 'BEGIN {print systime()}'
+1497429720
+
+$ awk 'BEGIN {print mktime("2017 06 14 10 42 00")}'
+1497429720
+
+$ awk 'BEGIN {print strftime("%F %T %Z",1497429720)}'
+2017-06-14 10:42:00 CEST
+
+$ awk 'BEGIN {print strftime("%F %T %Z",1497429720,1)}'
+2017-06-14 08:42:00 GMT
+```
 
 ## <a name="linux"></a> Linux
 
@@ -302,6 +318,8 @@ $ sudo mount /mnt/myname
 ```
 
 More information: https://wiki.ubuntuusers.de/WebDAV/
+
+Using it to back up your Nextcloud: https://github.com/wolframroesler/back-up-nextcloud
 
 ### Extract Pages From PDF File
 
