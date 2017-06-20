@@ -251,6 +251,28 @@ $ awk 'BEGIN {print strftime("%F %T %Z",1497429720,1)}'
 2017-06-14 08:42:00 GMT
 ```
 
+### Asymmetric Encryption
+
+Make key pair:
+
+```sh
+$ openssl req -newkey rsa:2048 -new -nodes -x509 -days 36500 -out cert.pem -keyout key.pem
+```
+
+`cert.pem` is the certificate file (public key), used for encryption. `key.pem` is the private key file, used for decryption.
+
+Encrypt:
+
+```sh
+$ openssl smime -encrypt -aes256 -binary -outform DER cert.pem <cleartext.dat  >ciphertext.dat
+```
+
+Decrypt:
+
+```
+$ openssl smime -decrypt -inform DER -inkey key.pem <ciphertext.dat >cleartext.dat
+```
+
 ## <a name="linux"></a> Linux
 
 ### Natural Scrolling
