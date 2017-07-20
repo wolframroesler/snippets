@@ -226,12 +226,18 @@ endif (CCACHE_FOUND)
 
 ### Shell Prompt
 
-Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. Put the following into your .profile or .bashrc.
+Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. When in a git repository, show a check mark or cross depending on whether the working tree is clean.
+
+Put the following into your .profile or .bashrc.
 
 ```sh
+gitstatus() {
+    [ -d .git ] || return
+    git status --short | grep . &>/dev/null && echo "× " || echo "✓ "
+}
 PS1BEFORE=$(tput sgr0)$(tput rev)$(tput setaf 4)
 PS1AFTER=$(tput sgr0)
-PS1='\[$PS1BEFORE\]$? [\h:\w]\[$PS1AFTER\] \$ '
+PS1='\[$PS1BEFORE\]$? [\h:\w]\[$PS1AFTER\] $(gitstatus)\$ '
 ```
 
 ![Screenshot showing bash prompt](prompt.png)
