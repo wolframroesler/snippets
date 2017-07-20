@@ -59,6 +59,14 @@ for (std::string const &t : tokens) {
 }
 ```
 
+### Trim white space from beginning and end of a string
+
+```cpp
+#include <boost/algorithm/string.hpp>
+std::string const untrimmed = ...;
+auto const trimmed = boost::trim_copy(untrimmed);
+```
+
 ### Load a file into memory
 
 ```cpp
