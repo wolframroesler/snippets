@@ -48,6 +48,17 @@ if (std::regex_match(string,std::regex("[a-zA-Z]*")) {
 }
 ```
 
+### Split a string into lines
+
+```cpp
+#include <boost/tokenizer.hpp>
+auto const tokens = boost::tokenizer<boost::char_separator<char>>(mystring,
+    boost::char_separator<char>("\n"));
+for (std::string const &t : tokens) {
+    std::cout << t << std::endl;
+}
+```
+
 ### Load a file into memory
 
 ```cpp
