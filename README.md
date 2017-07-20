@@ -234,7 +234,7 @@ PS1AFTER=$(tput sgr0)
 PS1='\[$PS1BEFORE\]$? [\h:\w]\[$PS1AFTER\] \$ '
 ```
 
-![Screenshot showing bash prompt](img01.png)
+![Screenshot showing bash prompt](prompt.png)
  
 ### Host Name And Work Directory In Terminal Window Title
 
