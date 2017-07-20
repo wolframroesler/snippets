@@ -362,6 +362,16 @@ More information: https://wiki.ubuntuusers.de/WebDAV/
 
 Using it to back up your Nextcloud: https://github.com/wolframroesler/back-up-nextcloud
 
+### Screen Recording
+
+```sh
+$ sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
+$ sudo apt-get update
+$ sudo apt-get install simplescreenrecorder
+```
+
+More: http://www.maartenbaert.be/simplescreenrecorder/
+
 ### Extract Pages From PDF File
 
 This is not limited to Linux, but works whenever Ghostscript is installed. Replace 39 and 42 with the page numbers you want to extract.
