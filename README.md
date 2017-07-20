@@ -292,6 +292,18 @@ Decrypt:
 $ openssl smime -decrypt -inform DER -inkey key.pem <ciphertext.dat >cleartext.dat
 ```
 
+### Extract Pages From PDF File
+
+Requires Ghostscript. Replace 39 and 42 with the page numbers you want to extract.
+
+```sh
+$ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
+	-dFirstPage=39 \
+	-dLastPage=42 \
+	-sOutputFile=name_of_your_output_file.pdf \
+	name_of_your_input_file.pdf
+```
+
 ## <a name="linux"></a> Linux
 
 ### Natural Scrolling
@@ -371,18 +383,6 @@ $ sudo apt-get install simplescreenrecorder
 ```
 
 More: http://www.maartenbaert.be/simplescreenrecorder/
-
-### Extract Pages From PDF File
-
-This is not limited to Linux, but works whenever Ghostscript is installed. Replace 39 and 42 with the page numbers you want to extract.
-
-```sh
-gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
-	-dFirstPage=39 \
-	-dLastPage=42 \
-	-sOutputFile=name_of_your_output_file.pdf \
-	name_of_your_input_file.pdf
-```
 
 ## <a name="macos"></a> macOS
 
