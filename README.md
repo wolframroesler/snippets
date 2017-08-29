@@ -282,16 +282,16 @@ Changing the history file name from the default .bash_history to something else 
 Requires gawk (the Gnu implementation of awk, e. g. as Linux has it).
 
 ```sh
-$ awk 'BEGIN {print systime()}'
+$ gawk 'BEGIN {print systime()}'
 1497429720
 
-$ awk 'BEGIN {print mktime("2017 06 14 10 42 00")}'
+$ gawk 'BEGIN {print mktime("2017 06 14 10 42 00")}'
 1497429720
 
-$ awk 'BEGIN {print strftime("%F %T %Z",1497429720)}'
+$ gawk 'BEGIN {print strftime("%F %T %Z",1497429720)}'
 2017-06-14 10:42:00 CEST
 
-$ awk 'BEGIN {print strftime("%F %T %Z",1497429720,1)}'
+$ gawk 'BEGIN {print strftime("%F %T %Z",1497429720,1)}'
 2017-06-14 08:42:00 GMT
 ```
 
