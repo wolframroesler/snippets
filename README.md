@@ -239,14 +239,20 @@ endif (CCACHE_FOUND)
 
 ### Shell Prompt
 
-Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. When in a git repository, show a check mark or cross depending on whether the working tree is clean.
+Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. When in a git repository, show the current git status: a cross if something needs to be committed, an up arrow if something needs to be pushed, a check mark if everything is clean.
 
 Put the following into your .profile or .bashrc.
 
 ```sh
 gitstatus() {
-    [ -d .git ] || return
-    git status --short | grep . &>/dev/null && echo "× " || echo "✓ "
+    S=$(git status -sb 2>/dev/null) || return
+    if [[ $S =~ [[:cntrl:]][^#] ]];then
+        echo "× "
+    elif [[ $S =~ ^##.*\[ahead ]];then
+        echo "↑ "
+    else
+        echo "✓ "
+    fi
 }
 PS1BEFORE=$(tput sgr0)$(tput rev)$(tput setaf 4)
 PS1AFTER=$(tput sgr0)
