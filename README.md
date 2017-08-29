@@ -107,6 +107,19 @@ std::string longstr;
 boost::filesystem::create_directories(boost::filesystem::path(file).parent_path());
 ```
 
+### Iterate over the files in a directory
+
+```cpp
+#include <boost/filesystem.hpp>
+#include <boost/range/iterator_range.hpp>
+
+std::string dir = ...;
+for(auto const &f: boost::make_iterator_range(boost::filesystem::directory_iterator(dir))) {
+    auto const file = f.path().string();
+    std::cout << "Found file: " << file << std::endl;
+}
+```
+
 ### Get current local time as a struct tm
 
 ```cpp
