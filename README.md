@@ -327,7 +327,7 @@ With pdftk:
 $ pdftk your-input-file.pdf cat 11-22 output your-output-file.pdf
 ```
 
-pdftk can extract arbitrary collection of pages (e. g., use `cat 1 3-5 8` to extract pages 1, 3, 4, 5, and 8).
+pdftk can extract arbitrary collections of pages (e. g., use `cat 1 3-5 8` to extract pages 1, 3, 4, 5, and 8).
 
 With Ghostscript:
 
