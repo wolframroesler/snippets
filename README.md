@@ -469,5 +469,15 @@ show profile;
 explain select ...;
 ```
 
+### Hang the database
+
+Useful in test cases, e. g. when testing where clauses constructed from user input. Causes a lot of load in the database that makes the application hang, hogs one more more CPUs, prevents new clients from connecting, and might require a DB bounce.
+
+```sql
+SELECT something
+FROM somewhere
+WHERE BENCHMARK(100000000000,ENCODE('a','b'))='c';
+```
+
 ---
 *Wolfram Rösler • wolfram@roesler-ac.de • https://twitter.com/wolframroesler • https://github.com/wolframroesler*
