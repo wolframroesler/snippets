@@ -319,14 +319,24 @@ $ openssl smime -decrypt -inform DER -inkey key.pem <ciphertext.dat >cleartext.d
 
 ### Extract Pages From PDF File
 
-Requires Ghostscript. Replace 39 and 42 with the page numbers you want to extract.
+Replace 11 and 22 with the range of pages you want to extract.
+
+With pdftk:
+
+```sh
+$ pdftk your-input-file.pdf cat 11-22 output your-output-file.pdf
+```
+
+pdftk can extract arbitrary collection of pages (e. g., use `cat 1 3-5 8` to extract pages 1, 3, 4, 5, and 8).
+
+With Ghostscript:
 
 ```sh
 $ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
-	-dFirstPage=39 \
-	-dLastPage=42 \
-	-sOutputFile=name_of_your_output_file.pdf \
-	name_of_your_input_file.pdf
+	-dFirstPage=11 \
+	-dLastPage=22 \
+	-sOutputFile=your-output-file.pdf \
+	your-input-file.pdf
 ```
 
 ## <a name="linux"></a> Linux
