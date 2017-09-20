@@ -32,19 +32,37 @@ using namespace std::literals;
 using namespace std::chrono_literals;
 ```
 
-### Replace a string with regex
-
-```cpp
-#include <regex>
-auto const result = regex_replace(str,std::regex("<"),"&lt;");
-```
-
 ### Check if a string matches a regex
 
 ```cpp
 #include <regex>
+
 if (std::regex_match(string,std::regex("[a-zA-Z]*")) {
     cout << "Matches\n";
+}
+```
+
+### Replace a string with regex
+
+```cpp
+#include <regex>
+
+auto const result = regex_replace(str,std::regex("<"),"&lt;");
+```
+
+### Extract matching substrings with regex
+
+```cpp
+#include <regex>
+
+auto const str = "Jul-18-2017";
+auto const re = std::regex("([a-zA-Z]*)-([0-9]*)-([0-9]*)");
+
+std::smatch match;
+if (std::regex_search(str,match,re)) {
+	std::cout << "Month: " << match[1] << ", day: " << match[2] << ", year: " << match[3] << "\n";
+} else {
+	// No match
 }
 ```
 
