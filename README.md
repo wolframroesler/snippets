@@ -238,6 +238,15 @@ About tag-based git version numbers: https://git-scm.com/docs/git-describe
 
 ## <a name="cmake"></a> cmake
 
+### Activate C++14
+
+... and be as portable as possible by switching off stuff like GNU language extensions.
+
+```cmake
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_EXTENSIONS OFF)
+```
+
 ### Same output directory for all sub-projects
 
 ```cmake
