@@ -37,7 +37,7 @@ using namespace std::chrono_literals;
 ```cpp
 #include <regex>
 
-if (std::regex_match(string,std::regex("[a-zA-Z]*")) {
+if (std::regex_match(string,std::regex("[a-zA-Z]*"))) {
     cout << "Matches\n";
 }
 ```
