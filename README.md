@@ -185,19 +185,33 @@ git config --global alias.godlog "log --graph --oneline --decorate"
 
 Requires git 1.6.1 or later.
 
+Install the "Open Document To Text" tool:
+
+```
+Linux
+$ sudo apt install odt2txt
+
+Mac
+$ brew install odt2txt
+```
+
 Add the following to `~/.gitconfig`:
 
 ```
 [diff "odf"]
-      textconv=odt2txt --stdout
+      textconv=odt2txt
+[diff "odp"]
+      textconv=odp2txt
+[diff "ods"]
+      textconv=ods2txt
 ```
 
 Add the following to the `.gitattributes` file in the project root:
 
 ```
-*.ods diff=odf
-*.odt diff=odf
-*.odp diff=odf
+*.odp diff=odp
+*.ods diff=ods
+*.odt diff=odt
 ```
 
 If `git diff` displays the following error:
