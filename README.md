@@ -261,6 +261,18 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_EXTENSIONS OFF)
 ```
 
+### Link with the pthreads library
+
+```cmake
+cmake_minimum_required (VERSION 3.5)
+project (myproject CXX)
+find_package (Threads REQUIRED)
+add_executable (myproject ...)
+target_link_libraries (myproject Threads::Threads)
+```
+
+More: https://stackoverflow.com/questions/1620918/cmake-and-libpthread
+
 ### Same output directory for all sub-projects
 
 ```cmake
