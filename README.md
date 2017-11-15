@@ -290,30 +290,72 @@ endif (CCACHE_FOUND)
 
 ## <a name="unix"></a> Unix/Shell
 
-### Shell Prompt
+Where "Shell" means bash, or something sufficiently compatible.
 
-Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. When in a git repository, show the current git status: a cross if something needs to be committed, an up arrow if something needs to be pushed, a check mark if everything is clean.
+### Shell Prompt And Git Status
 
-Put the following into your .profile or .bashrc.
+Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. When in a git repository, show the current git status: a cross if something needs to be committed, an up arrow if something needs to be pushed, a down arrow when something can be pulled, a check mark if everything is clean.
+
+Put the following into your `.profile` or `.bashrc`.
 
 ```sh
 gitstatus() {
-    S=$(git status -sb 2>/dev/null) || return
-    if [[ $S =~ [[:cntrl:]][^#] ]];then
-        echo "× "
-    elif [[ $S =~ ^##.*\[ahead ]];then
-        echo "↑ "
+    if [ "$1" = "--color" ];then
+        local RED=$(tput setaf 1)
+        local BLU=$(tput setaf 6)
+        local GRN=$(tput setaf 2)
+        local OFF=$(tput sgr0)
     else
-        echo "✓ "
+        local RED=""
+        local BLU=""
+        local GRN=""
+        local OFF=""
+    fi
+
+    local S
+    S=$(LANG=C git status -sb --porcelain 2>/dev/null) || return
+    if [[ $S =~ [[:cntrl:]][^#] ]];then
+        echo "${RED}×${OFF} "
+    elif [[ $S =~ ^##.*\[behind ]];then
+        echo "${BLU}↓${OFF} "
+    elif [[ $S =~ ^##.*\[ahead ]];then
+        echo "${BLU}↑${OFF} "
+    else
+        echo "${GRN}✓${OFF} "
     fi
 }
+
+gits() {
+    local G
+    find ${*:-.} -type d -name .git 2>/dev/null \
+    | while read G;do
+        local D=$(dirname "$G")
+        (cd "$D" >/dev/null && git remote update &>/dev/null && echo "$(gitstatus --color)$D")
+    done
+}
+
 PS1BEFORE=$(tput sgr0)$(tput rev)$(tput setaf 4)
 PS1AFTER=$(tput sgr0)
 PS1='\[$PS1BEFORE\]$? [\h:\w]\[$PS1AFTER\] $(gitstatus)\$ '
 ```
 
 ![Screenshot showing bash prompt](prompt.png)
- 
+
+This also defines the `gits` command which recursively searches the current directory (or directories you specify on the command line) for git repositories and displays their status (cross, up/down arrow, check mark as described above).
+
+```
+$ gits
+↑ ./afl-demo
+✓ ./cloud-backup
+✓ ./cmake-hello-world
+✓ ./ecs
+↑ ./helloworld
+✓ ./itunes-in-nextcloud
+× ./snippets
+↓ ./ThreadPool
+✓ ./version
+```
+
 ### Host Name And Work Directory In Terminal Window Title
 
 ```sh
