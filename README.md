@@ -575,4 +575,4 @@ WHERE BENCHMARK(100000000000,ENCODE('a','b'))='c';
 ```
 
 ---
-*Wolfram Rösler • wolfram@roesler-ac.de • https://twitter.com/wolframroesler • https://github.com/wolframroesler*
+*Wolfram Rösler • wolfram@roesler-ac.de • https://github.com/wolframroesler • https://twitter.com/wolframroesler • https://www.linkedin.com/in/wolframroesler/*
