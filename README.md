@@ -438,6 +438,8 @@ $ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
 
 ### Natural Scrolling
 
+Make your mouse wheel work like on a Mac: Roll up to scroll up, roll down to scroll down.
+
 Put the following into /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf, then reboot:
 
 ```
@@ -451,7 +453,42 @@ Section "InputClass"
 EndSection
 ```
 
-Source: <https://kofler.info/natural-scrolling-mit-dem-mausrad/#more-1956>
+If this doesn't work, try:
+
+```sh
+$ xinput set-prop 9 275 1
+```
+
+`9` and `275` are just examples, find the actual values as follows.
+
+First, the `9` is the `id` of your mouse device, to be found like this:
+
+```sh
+$ xinput list
+⎡ Virtual core pointer                    	id=2	[master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer              	id=4	[slave  pointer  (2)]
+⎜   ↳ Logitech USB-PS/2 Optical Mouse         	id=9	[slave  pointer  (2)]
+⎣ Virtual core keyboard                   	id=3	[master keyboard (2)]
+    ↳ Virtual core XTEST keyboard             	id=5	[slave  keyboard (3)]
+    ↳ Power Button                            	id=6	[slave  keyboard (3)]
+    ↳ Video Bus                               	id=7	[slave  keyboard (3)]
+    ↳ Power Button                            	id=8	[slave  keyboard (3)]
+    ↳ Eee PC WMI hotkeys                      	id=10	[slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard            	id=11	[slave  keyboard (3)]
+```
+
+Once you got the `9`, find the `275` like this:
+
+```sh
+$ xinput list-props 9 | grep -i natural
+	libinput Natural Scrolling Enabled (275):	0
+	libinput Natural Scrolling Enabled Default (276):	0
+```
+
+Sources:
+
+* https://wiki.archlinux.org/index.php/Libinput#Natural_scrolling
+* https://kofler.info/natural-scrolling-mit-dem-mausrad/#more-1956
 
 ### Show System Messages During Boot/Shutdown
 
