@@ -453,6 +453,37 @@ EndSection
 
 Source: <https://kofler.info/natural-scrolling-mit-dem-mausrad/#more-1956>
 
+### Show System Messages During Boot/Shutdown
+
+Make your machine start up and shut down like a real computer.
+
+In `/etc/default/grub`, remove `quiet splash` from `GRUB_CMDLINE_LINUX_DEFAULT`, so it's
+
+```
+GRUB_CMDLINE_LINUX_DEFAULT=""
+```
+
+Uncomment `GRUB_GFXMODE` and set it to one one more resolutions supported by your monitor, followed by `auto`, for example
+
+```
+GRUB_GFXMODE="1920x1080,640x480,auto"
+```
+
+Then:
+
+```sh
+$ sudo update-grub
+```
+
+Reboot and enjoy.
+
+Sources:
+
+* https://askubuntu.com/questions/25022/how-to-enable-boot-messages-to-be-printed-on-screen-during-boot-up
+* http://www.subdude-site.com/WebPages_Local/RefInfo/Computer/Linux/BootMessages_andGrub2/BootMessages_andGrub2.htm
+* https://askubuntu.com/questions/103516/grub2-use-maximum-detected-resolution#142332
+* https://www.gnu.org/software/grub/manual/grub/html_node/gfxmode.html
+
 ### Mount Nextcloud
 
 Access the files in your Nextcloud without syncing them to your harddisk, using Nextcloud's WebDAV interface. Doesn't require disk space to store your Nextcloud files locally. Doesn't use the Nextcloud client software.
