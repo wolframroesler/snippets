@@ -570,7 +570,7 @@ $ sudo mount /mnt/myname
 
 More information: https://wiki.ubuntuusers.de/WebDAV/
 
-Using it to back up your Nextcloud: https://github.com/wolframroesler/back-up-nextcloud
+Using it to back up your Nextcloud: https://gitlab.com/wolframroesler/back-up-nextcloud
 
 ### Screen Recording
 
@@ -643,4 +643,4 @@ WHERE BENCHMARK(100000000000,ENCODE('a','b'))='c';
 ```
 
 ---
-*Wolfram Rösler • wolfram@roesler-ac.de • https://github.com/wolframroesler • https://twitter.com/wolframroesler • https://www.linkedin.com/in/wolframroesler/*
+*Wolfram Rösler • wolfram@roesler-ac.de • https://gitlab.com/wolframroesler • https://twitter.com/wolframroesler • https://www.linkedin.com/in/wolframroesler/*
