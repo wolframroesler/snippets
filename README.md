@@ -436,6 +436,30 @@ $ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
 
 ## <a name="linux"></a> Linux
 
+### Disable pager in systemctl
+
+which is annoying as hell and completely different from the way Unix programs classically work.
+
+In shell profile:
+
+```sh
+export SYSTEMD_PAGER=cat
+```
+
+Then:
+
+```sh
+$ sudo visudo
+```
+
+Add the following line in the "Defaults" section:
+
+```sh
+Defaults        env_keep += "SYSTEMD_PAGER"
+```
+
+More info: https://unix.stackexchange.com/questions/343168/can-i-prevent-service-foo-status-from-paging-its-output-through-less
+
 ### Natural Scrolling
 
 Make your mouse wheel work like on a Mac: Roll up to scroll up, roll down to scroll down.
