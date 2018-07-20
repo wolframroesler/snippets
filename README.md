@@ -294,7 +294,7 @@ Where "Shell" means bash, or something sufficiently compatible.
 
 ### Shell Prompt And Git Status
 
-Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. When in a git repository, show the current git status: a cross if something needs to be committed, an up arrow if something needs to be pushed, a down arrow when something can be pulled, a check mark if everything is clean.
+Show the last command's exit status in the shell prompt, and show the prompt with a dark background to make it stand out better. When in a git repository, show the current git status: a cross if something needs to be committed, an up arrow if something needs to be pushed, a down arrow when something can be pulled, three stacked horizontal lines if there's a shash, a check mark if everything is clean.
 
 Put the following into your `.profile` or `.bashrc`.
 
@@ -320,6 +320,8 @@ gitstatus() {
         echo "${BLU}↓${OFF} "
     elif [[ $S =~ ^##.*\[ahead ]];then
         echo "${BLU}↑${OFF} "
+    elif git stash list | grep -q .;then
+        echo "${BLU}≡${BLU} "
     else
         echo "${GRN}✓${OFF} "
     fi
