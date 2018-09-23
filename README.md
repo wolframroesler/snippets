@@ -642,6 +642,23 @@ $ brew install htop
 $ brew install tree
 ```
 
+### Install boost
+
+To use the boost C++ libraries. Requires the `brew` package manager desribed above.
+
+```sh
+$ brew install boost
+$ ln -s /usr/local/Cellar/boost/1.67.0_1/ /usr/local/boost
+```
+
+And update the symlink whenever a new boost version comes out. Why don't they install in `/usr/local/boost` directly like everyone else, or at least create the symlink automatically?
+
+If you need to build different projects with different boost versions you can leave the symlink away and use an environment variable instead:
+
+```sh
+$ export BOOST_ROOT=/usr/local/Cellar/boost/1.67.0_1/
+```
+
 ## <a name="mysql"></a> MySQL/MariaDB
 
 ### SQL Profiling
