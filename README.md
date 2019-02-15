@@ -8,6 +8,7 @@ Small snippets of code that I refer to in my daily work.
 * [git](#git)
 * [cmake](#cmake)
 * [Unix/Shell](#unix)
+* [vi/vim](#vi)
 * [Linux](#linux)
 * [macOS](#macos)
 * [MySQL/MariaDB](#mysql)
@@ -434,6 +435,14 @@ $ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
 	-dLastPage=22 \
 	-sOutputFile=your-output-file.pdf \
 	your-input-file.pdf
+```
+
+## <a name="vi"></a> vi/vim
+
+### Convert line endings from DOS to Unix
+
+```
+:set ff=unix
 ```
 
 ## <a name="linux"></a> Linux
