@@ -33,7 +33,13 @@ using namespace std::literals;
 using namespace std::chrono_literals;
 ```
 
-### Check if a string matches a regex
+### Regular Expressions
+
+std::regex reqires at least C++11. CTRE requires at least C++17.
+
+#### Check if a string matches a regex
+
+##### std::regex
 
 ```cpp
 #include <regex>
@@ -43,25 +49,52 @@ if (std::regex_match(string,std::regex("[a-zA-Z]*"))) {
 }
 ```
 
-### Replace a string with regex
+##### CTRE
 
 ```cpp
-#include <regex>
+#include <ctre.hpp>
+using namespace ctre::literals;
 
-auto const result = regex_replace(str,std::regex("<"),"&lt;");
+if ("[a-zA-Z]*"_ctre.match(string)) {
+    cout << "Matches\n";
+}
 ```
 
-### Extract matching substrings with regex
+#### Replace a string with regex
+
+##### std::regex
 
 ```cpp
 #include <regex>
 
-auto const str = "Jul-18-2017";
-auto const re = std::regex("([a-zA-Z]*)-([0-9]*)-([0-9]*)");
+const auto result = regex_replace(str,std::regex("<"),"&lt;");
+```
 
+#### Extract matching substrings with regex
+
+##### std::regex
+
+```cpp
+#include <regex>
+
+const auto str = "Jul-18-2017";
 std::smatch match;
-if (std::regex_search(str,match,re)) {
+if (std::regex_search(str,match,std::regex("([a-zA-Z]*)-([0-9]*)-([0-9]*)"))) {
 	std::cout << "Month: " << match[1] << ", day: " << match[2] << ", year: " << match[3] << "\n";
+} else {
+	// No match
+}
+```
+
+##### CTRE
+
+```cpp
+#include <ctre.hpp>
+using namespace ctre::literals;
+
+const auto str = "Jul-18-2017";
+if (const auto match="([a-zA-Z]*)-([0-9]*)-([0-9]*)"_ctre.match(str)) {
+	std::cout << "Month: " <<  match.get<1>() << ", day: " <<  match.get<2>() << ", year: " <<  match.get<3>() << "\n";
 } else {
 	// No match
 }
