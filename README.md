@@ -207,6 +207,37 @@ boost::iostreams::stream<boost::iostreams::file_descriptor_source> is(src);
 is >> myvariable;
 ```
 
+### Build gcc 9 from source
+
+It's surprisingly easy.
+
+```sh
+$ cd
+$ mkdir gcc
+$ cd gcc
+$ wget ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-9.1.0/gcc-9.1.0.tar.gz
+$ tar xzf gcc-9.1.0.tar.gz
+$ cd gcc-9.1.0
+$ contrib/download_prerequisites
+
+$ cd ~/gcc
+$ mkdir build
+$ cd build
+$ ../gcc-9.1.0/configure --prefix=$HOME/gcc/install --disable-multilib
+$ make
+$ make install
+
+$ ~/gcc/install/bin/g++ --version
+g++ (GCC) 9.1.0
+
+$ sudo update-alternatives --install /usr/bin/gcc gcc $HOME/gcc/install/bin/gcc 60 --slave /usr/bin/g++ g++ $HOME/gcc/install/bin/g++
+$ sudo update-alternatives --config gcc
+$ gcc --version
+gcc (GCC) 9.1.0
+$ g++ --version
+g++ (GCC) 9.1.0
+```
+
 ## <a name="git"></a> git
 
 ### Create the “git godlog” command
