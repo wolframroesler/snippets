@@ -35,7 +35,7 @@ using namespace std::chrono_literals;
 
 ### Regular Expressions
 
-std::regex reqires at least C++11. CTRE requires at least C++17.
+std::regex requires at least C++11. CTRE requires at least C++17.
 
 #### Check if a string matches a regex
 
