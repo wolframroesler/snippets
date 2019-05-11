@@ -479,6 +479,12 @@ Decrypt:
 $ openssl smime -decrypt -inform DER -inkey key.pem <ciphertext.dat >cleartext.dat
 ```
 
+Show contents of a pem file:
+
+```
+$ openssl x509 -in filename.pem -text
+```
+
 ### Extract Pages From PDF File
 
 Replace 11 and 22 with the range of pages you want to extract.
