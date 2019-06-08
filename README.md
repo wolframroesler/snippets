@@ -207,6 +207,25 @@ boost::iostreams::stream<boost::iostreams::file_descriptor_source> is(src);
 is >> myvariable;
 ```
 
+### Build Boost from source
+
+Download the Boost source to your home directory, then:
+
+```sh
+$ chmod a+wrx /usr/local/lib /usr/local/include
+$ rm -f /usr/local/lib/*boost*
+$ rm -rf /usr/local/include/boost
+$ mkdir -p boost
+$ cd boost
+$ rm -fr build
+$ mkdir build
+$ rm -fr boost_*
+$ tar xzf ~/boost_*.tar.gz
+$ cd boost_*
+$ ./bootstrap.sh --without-libraries=python
+$ ./b2 --build-dir=~/boost/build $MINUSJ variant=release link=static threading=multi runtime-link=static install
+```
+
 ### Build gcc 9 from source
 
 It's surprisingly easy.
