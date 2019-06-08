@@ -238,6 +238,12 @@ $ g++ --version
 g++ (GCC) 9.1.0
 ```
 
+To run executables built with gcc 9 (unless linked statically):
+
+```sh
+$ export LD_LIBRARY_PATH=$HOME/gcc/install/lib64:$LD_LIBRARY_PATH
+```
+
 ## <a name="git"></a> git
 
 ### Create the “git godlog” command
