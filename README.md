@@ -5,6 +5,7 @@ Small snippets of code that I refer to in my daily work.
 ## Table of Contents
 
 * [C++](#cpp)
+* [Build instructions](#build)
 * [git](#git)
 * [cmake](#cmake)
 * [Unix/Shell](#unix)
@@ -207,6 +208,8 @@ boost::iostreams::stream<boost::iostreams::file_descriptor_source> is(src);
 is >> myvariable;
 ```
 
+## <a name="build"></a> Build Instructions
+
 ### Build Boost from source
 
 Download the Boost source to your home directory, then:
@@ -262,6 +265,29 @@ To run executables built with gcc 9 (unless linked statically):
 ```sh
 $ export LD_LIBRARY_PATH=$HOME/gcc/install/lib64:$LD_LIBRARY_PATH
 ```
+
+### Build cmake from source
+
+```
+$ cd /opt
+$ wget https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5.tar.gz
+$ tar xzf cmake-3.14.5.tar.gz
+$ cd cmake-3.14.5
+$ mkdir build
+$ cd $_
+$ cmake ..
+$ make -j8
+$ sudo mkdir -p -m 777 /usr/local/doc /usr/local/share
+$ make install
+$ cmake --version
+cmake version 3.14.5
+```
+
+If there's no cmake already installed, do the following instead of invoking cmake (in the source directory, don't create a build directory):
+
+	$ ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release
+
+More info: https://cmake.org/install/
 
 ## <a name="git"></a> git
 
