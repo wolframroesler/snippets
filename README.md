@@ -188,6 +188,52 @@ request << boost::network::header("Connection","close");
 auto const result = body(boost::network::http::client().get(request));
 ```
 
+### Load a URL with licurl
+
+```cpp
+#include <curl/curl.h>
+
+const auto curl = curl_easy_init();
+if (!curl) {
+    throw std::runtime_error("Error initializing the curl context");
+}
+
+// Close the curl session when done
+BOOST_SCOPE_EXIT_ALL(curl) {
+    curl_easy_cleanup(curl);
+};
+
+// Configure the curl session
+std::string buf;
+char err[CURL_ERROR_SIZE] = "";
+curl_easy_setopt(curl,CURLOPT_URL,url.c_str());
+curl_easy_setopt(curl,CURLOPT_SSL_VERIFYPEER,0L);
+curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION,WriteFct);
+curl_easy_setopt(curl,CURLOPT_WRITEDATA,static_cast<void*>(&buf));
+curl_easy_setopt(curl,CURLOPT_ERRORBUFFER,err);
+
+// Set the POST data (and activate POST) if requested by the caller
+if (postdata) {
+    // Note: CURLOPT_POSTFIELDSIZE is restricted to 2 GB or less.
+    curl_easy_setopt(curl,CURLOPT_POSTFIELDSIZE,postdata->size());
+    curl_easy_setopt(curl,CURLOPT_POSTFIELDS,postdata->data());
+}
+
+// Perform the actual HTTP query
+const auto res1 = curl_easy_perform(curl);
+if (res1!=CURLE_OK) {
+    throw std::runtime_error("Error accessing " + url + ": " + (err[0] ? err : curl_easy_strerror(res1)));
+}
+
+// Check the HTTP result status
+long status = -1;
+const auto res2 = curl_easy_getinfo(curl,CURLINFO_RESPONSE_CODE,&status);
+if (res2!=CURLE_OK) {
+    throw std::runtime_error("Error getting HTTP result status: "s + curl_easy_strerror(res2));
+}
+
+```
+
 ### Convert a file descriptor into an I/O stream
 
 ```cpp
