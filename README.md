@@ -363,6 +363,8 @@ Install the "Open Document To Text" tool:
 ```
 Linux
 $ sudo apt install odt2txt
+or, depending on distro:
+$ sudo apt install unoconv
 
 Mac
 $ brew install odt2txt
@@ -371,7 +373,7 @@ $ brew install odt2txt
 Add the following to `~/.gitconfig`:
 
 ```
-[diff "odf"]
+[diff "odt"]
       textconv=odt2txt
 [diff "odp"]
       textconv=odp2txt
