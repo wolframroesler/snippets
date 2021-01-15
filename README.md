@@ -354,39 +354,47 @@ More info: https://cmake.org/install/
 git config --global alias.godlog "log --graph --oneline --decorate"
 ```
 
-### Manage Libre Office files in git
+### Manage Office files in git
 
-Requires git 1.6.1 or later.
+This allows you to use "git diff" with Microsoft Office (Word, PowerPoint) and Libre Office (Writer, Calc, Impress) files stored in a git repository. The trick is to tell git how to extract plain text from these files, on which the regular diff can be used.
 
-Install the "Open Document To Text" tool:
+Install the conversion tools:
 
 ```
-Linux
-$ sudo apt install odt2txt
-or, depending on distro:
-$ sudo apt install unoconv
-
-Mac
-$ brew install odt2txt
+$ sudo apt install unoconv catdoc
 ```
+
+Optionally, only needed for `.pptx` files:
+
+* `$ pip install python-pptx`
+* Copy `git-pptx-textconv.py` from this repo to a location of your choice and make it executable
 
 Add the following to `~/.gitconfig`:
 
 ```
+[diff "doc"]
+    textconv=catdoc
 [diff "odt"]
-      textconv=odt2txt
+    textconv=odt2txt
 [diff "odp"]
-      textconv=odp2txt
+    textconv=odp2txt
 [diff "ods"]
-      textconv=ods2txt
+    textconv=ods2txt
+[diff "ppt"]
+    textconv=catppt
+[diff "pptx"]
+    textconv=/location/of/git-pptx-textconv.py
 ```
 
-Add the following to the `.gitattributes` file in the project root:
+Add the following to `~/.config/git/attributes` (or, alternatively, to the `.gitattributes` file in the project root):
 
 ```
+*.doc diff=doc
 *.odp diff=odp
 *.ods diff=ods
 *.odt diff=odt
+*.ppt diff=ppt
+*.pptx diff=pptx
 ```
 
 If `git diff` displays the following error:
@@ -402,6 +410,8 @@ More information:
 
 * http://www-verimag.imag.fr/~moy/opendocument/
 * https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes ("Diffing Binary Files" section)
+* https://stackoverflow.com/a/32259984/14667736 (original source of git-pptx-textconv.py, I only ported it to Python 3)
+* https://stackoverflow.com/questions/52873519/how-can-i-get-useful-git-diff-of-files-saved-by-libre-office-writer-with-output/65733260
 
 ### Put git version number into PDF
 
